@@ -6,7 +6,7 @@ import Player from './component/player'
 function App() {
   return (
     <Router>
-      <Route path="/" extract component={Join} />
+      <Route path="/" exact component={Join} />
       <Route path="/chat" component = {Player} />
     </Router>
   );
