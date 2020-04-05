@@ -1,7 +1,10 @@
 import React from 'react';
 import YouTube from 'react-youtube';
+import queryString from 'query-string';
+import io from "socket.io-client";
 
 const videoIdA = '-DX3vJiqxm4';
+
 
 export default class Player extends React.Component {
   constructor(props) {
@@ -20,7 +23,7 @@ export default class Player extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
-
+  
   onReady(event) {
     this.setState({
       player: event.target,
@@ -60,6 +63,7 @@ export default class Player extends React.Component {
 
 
   render() {
+    console.log(this.props);
     return (
       <div align='center'>
         <form>
