@@ -1,3 +1,4 @@
+//heroku restart -a app_name
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');

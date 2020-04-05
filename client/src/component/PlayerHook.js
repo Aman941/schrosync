@@ -16,7 +16,7 @@ const PlayerHook = (props) =>{
     const[room , setRoom] = useState('');
     const[user , setUser] = useState('');
 
-    const ENDPOINT = 'localhost:5000';
+    const ENDPOINT = 'https://vast-oasis-04951.herokuapp.com/';
 
     useEffect(() => {
         const { name, room } = queryString.parse(props.location.search);
