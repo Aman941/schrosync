@@ -16,7 +16,7 @@ const PlayerHook = (props) =>{
     const[room , setRoom] = useState('');
     const[user , setUser] = useState('');
 
-    const ENDPOINT = 'https://vast-oasis-04951.herokuapp.com/';
+    const ENDPOINT = 'localhost:5000';
 
     useEffect(() => {
         const { name, room } = queryString.parse(props.location.search);
@@ -70,7 +70,7 @@ const PlayerHook = (props) =>{
 
     const onStateChange = (event) =>
       {
-        console.log(event.target.getCurrentTime());
+        console.log(player.getCurrentTime());
       }
     const onPlayVideo = () => {
         player.playVideo();
