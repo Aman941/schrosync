@@ -8,13 +8,15 @@ const videoIdA = '-DX3vJiqxm4';
 let socket;
 
 const PlayerHook = (props) =>{
-    console.log(props);
+    //console.log(props);
     const[videoId , setVideoId] = useState(videoIdA);
     const[tempId , setTempId]  = useState('');
     const[player , setPlayer] = useState(null);
     const[name , setName] = useState('');
     const[room , setRoom] = useState('');
     const[user , setUser] = useState('');
+    const[timer , setTimer] = useState(0);
+    const[isset , setIsset] = useState(false);
 
     const ENDPOINT = 'localhost:5000';
 
@@ -35,14 +37,32 @@ const PlayerHook = (props) =>{
 
     useEffect(() => {
         socket.on('changedLink',({video_id}) => {
+            //console.log(`player in socket ${player}`);
             setVideoId(video_id.video_id);
         })
-    },[]);
+    });
     
 
     const onReady = (event) => {
         setPlayer(event.target);
         event.target.pauseVideo();
+    }
+
+    useEffect(() => {
+      socket.on('videoSync', ({time}) => {
+        console.log(` time recieved by socket.on is ${time}`);
+        setTimer(time);
+        setIsset(true);
+      });
+    },[]);
+
+    if(isset)
+    {
+      console.log(`executed time is ${timer}`);
+      player.seekTo(timer);
+      player.playVideo();
+      setIsset(false);
+      //setTimer(0);
     }
 
     const onChange = (event) => {
@@ -70,7 +90,7 @@ const PlayerHook = (props) =>{
 
     const onStateChange = (event) =>
       {
-        console.log(player.getCurrentTime());
+        console.log(event.target.getCurrentTime());
       }
     const onPlayVideo = () => {
         player.playVideo();
@@ -79,6 +99,13 @@ const PlayerHook = (props) =>{
     const onPauseVideo = () => {
         player.pauseVideo();
       }
+
+    const onSyncVideo = () => {
+      const time = player.getCurrentTime();
+      player.playVideo();
+      console.log(`time emmited is ${time}`);
+      socket.emit('syncVideo' , {time: time});
+    }
 
     return (
         <div align='center'>
@@ -96,6 +123,9 @@ const PlayerHook = (props) =>{
           </button>
           <button type="button" onClick={onPauseVideo}>
             Pause
+          </button>
+          <button type="button" onClick={onSyncVideo}>
+            Sync
           </button>
         </div>
       );

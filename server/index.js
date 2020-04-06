@@ -38,7 +38,15 @@ io.on('connect' , (socket) =>{
           console.log(socket.id);
           console.log(`link == ${video_id} requested by ${user.name}`);
           socket.broadcast.to(user.room).emit('changedLink' , {video_id:{video_id}});
-      })
+      });
+
+      // on sync video request
+
+      socket.on('syncVideo' , ({time}) => {
+          const user = getUser(socket.id);
+          console.log(`time recieved ${time}`);
+          socket.broadcast.to(user.room).emit('videoSync' , {time});
+      });
 });
 
 server.listen(PORT,() => (console.log(`Server has started on port ${PORT}`)));
