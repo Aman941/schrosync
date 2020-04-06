@@ -3,6 +3,10 @@ import YouTube from 'react-youtube';
 import io from 'socket.io-client';
 import queryString from 'query-string';
 
+import Infobar from './Infobar';
+import Onlineinfo from './Onlineinfo';
+import Chat from './Chat';
+
 
 const videoIdA = '-DX3vJiqxm4';
 let socket;
@@ -17,6 +21,9 @@ const PlayerHook = (props) =>{
     const[user , setUser] = useState('');
     const[timer , setTimer] = useState(0);
     const[isset , setIsset] = useState(false);
+    const[roomUsers , setRoomUsers] = useState([]);
+    const [message, setMessage] = useState('');
+    const [messages, setMessages] = useState([]);
 
     const ENDPOINT = 'localhost:5000';
 
@@ -41,6 +48,12 @@ const PlayerHook = (props) =>{
             setVideoId(video_id.video_id);
         })
     });
+
+    useEffect(() => {
+      socket.on('roomData', ({room , users}) => {
+        setRoomUsers(users);
+      })
+    })
     
 
     const onReady = (event) => {
@@ -107,7 +120,30 @@ const PlayerHook = (props) =>{
       socket.emit('syncVideo' , {time: time});
     }
 
+    // Chat functions
+    // send message
+    // reieve message
+    // InfoBar
+
+    useEffect(() => {
+      socket.on('message', message => {
+        setMessages(messages => [ ...messages, message ]);
+      });
+    },[]);
+
+    const sendMessage = (event) => {
+      event.preventDefault();
+  
+      if(message) {
+        socket.emit('sendMessage', message, () => setMessage(''));
+      }
+    }
+
+
+
     return (
+      <div className = 'overAllContainer'>
+        <Infobar name = {name} room = {room} />
         <div align='center'>
           <form>
             <input type = 'text' placeholder = 'Enter Url' onChange = {onChange}/>
@@ -128,6 +164,9 @@ const PlayerHook = (props) =>{
             Sync
           </button>
         </div>
+        <Onlineinfo users = {roomUsers} />
+        <Chat messages = {messages} message = {message} name = {name} setMessage = {setMessage} sendMessage = {sendMessage} />
+      </div>
       );
 
 }
