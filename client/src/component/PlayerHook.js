@@ -10,7 +10,7 @@ import Chat from './Chat';
 import './style/PlayerHook.css';
 
 
-const videoIdA = '-DX3vJiqxm4';
+const videoIdA = '11BXffQZD0Q';
 let socket;
 
 const PlayerHook = (props) =>{
@@ -27,7 +27,7 @@ const PlayerHook = (props) =>{
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
 
-    const ENDPOINT = 'localhost:5000';
+    const ENDPOINT = 'https://vast-oasis-04951.herokuapp.com/';
 
     useEffect(() => {
         const { name, room } = queryString.parse(props.location.search);
