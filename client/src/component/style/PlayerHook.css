@@ -1,0 +1,85 @@
+@media (min-width: 900px){
+    .outerPlayer{
+        display: flex;
+    }
+}
+
+.onlyPlayer{
+    
+    flex-basis: 50%;
+}
+
+.Buttons{
+    max-width: 600px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.playButton{
+    color: #fff !important;
+    text-decoration: none;
+    box-sizing: border-box;
+    background: rgb(250, 40, 68);;
+    padding: 20px;
+    display: inline-block;
+    border: none;
+    flex-basis: 20%;
+}
+
+.pauseButton{
+    color: #fff !important;
+    text-decoration: none;
+    box-sizing: border-box;
+    background: rgb(250, 40, 68);;
+    padding: 20px;
+    display: inline-block;
+    border: none;
+    flex-basis: 20%;
+}
+
+.syncButton{
+    color: #fff !important;
+    text-decoration: none;
+    box-sizing: border-box;
+    background: rgb(250, 40, 68);;
+    padding: 20px;
+    display: inline-block;
+    border: none;
+    flex-basis: 20%;
+}
+
+.onlineInfo{
+    flex: 1;
+    display: none;
+}
+
+.chat{
+    flex-basis: 50%;
+}
+
+
+.formBlock{
+    display: flex;
+    padding-bottom: 2%;
+}
+
+.urlInput{
+    border: 2px solid #D3D3D3;
+    border-radius: 0;
+    padding: 5%;
+    width: 80%;
+    font-size: 1.2em;
+    flex: 5;
+}
+
+.urlSubmitButton{
+    color: #fff !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: rgb(250, 40, 68);
+    padding: 20px;
+    display: inline-block;
+    border: 2px solid #D3D3D3;
+    width: 20%;
+    flex: 1;
+}

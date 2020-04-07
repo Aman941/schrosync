@@ -7,6 +7,8 @@ import Infobar from './Infobar';
 import Onlineinfo from './Onlineinfo';
 import Chat from './Chat';
 
+import './style/PlayerHook.css';
+
 
 const videoIdA = '-DX3vJiqxm4';
 let socket;
@@ -143,29 +145,53 @@ const PlayerHook = (props) =>{
 
     return (
       <div className = 'overAllContainer'>
+
         <Infobar name = {name} room = {room} />
-        <div align='center'>
-          <form>
-            <input type = 'text' placeholder = 'Enter Url' onChange = {onChange}/>
-            <button type = 'submit' onClick = {onSubmit}>Submit</button>
+
+        <div>
+
+          <div className = 'formBlock'>
+
+          <form className ='form'>
+            <input className = 'urlInput' type = 'text' placeholder = 'Enter Url' onChange = {onChange}/>
+            <button className = 'urlSubmitButton' type = 'submit' onClick = {onSubmit}>Submit</button>
           </form>
+
+          </div>
+          <div className = 'outerPlayer'>
+
+            <div className = 'onlyPlayer'>
           <YouTube 
           videoId={videoId} 
           onReady={onReady}
           onStateChange={onStateChange}
            />
-          <button type="button" onClick={onPlayVideo}>
+           <div className='Buttons'>
+          <button className='playButton' type="button" onClick={onPlayVideo}>
             Play
           </button>
-          <button type="button" onClick={onPauseVideo}>
+          <button className='pauseButton' type="button" onClick={onPauseVideo}>
             Pause
           </button>
-          <button type="button" onClick={onSyncVideo}>
+          <button className='syncButton' type="button" onClick={onSyncVideo}>
             Sync
           </button>
-        </div>
+          </div>
+          </div>
+
+        <div className = 'onlineInfo'>
         <Onlineinfo users = {roomUsers} />
+        </div>
+
+        <div className = 'chat'>
         <Chat messages = {messages} message = {message} name = {name} setMessage = {setMessage} sendMessage = {sendMessage} />
+        </div>
+
+        </div>
+
+        </div>
+
+
       </div>
       );
 
