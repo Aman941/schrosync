@@ -4,6 +4,7 @@ import './style/Inputbar.css';
 
 const Inputbar = ({message , setMessage , sendMessage}) => {
     return(
+      <div className='inputbar-container'>
         <form className="form">
         <input
           className="input"
@@ -15,6 +16,7 @@ const Inputbar = ({message , setMessage , sendMessage}) => {
         />
         <button className="sendButton" onClick={e => sendMessage(e)}>Send</button>
       </form>
+      </div>
     )
 }
 

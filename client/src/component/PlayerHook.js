@@ -27,7 +27,7 @@ const PlayerHook = (props) =>{
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
 
-    const ENDPOINT = 'https://vast-oasis-04951.herokuapp.com/';
+    const ENDPOINT = 'localhost:5000';
 
     useEffect(() => {
         const { name, room } = queryString.parse(props.location.search);
@@ -151,40 +151,46 @@ const PlayerHook = (props) =>{
         <div>
 
           <div className = 'formBlock'>
-
           <form className ='form'>
             <input className = 'urlInput' type = 'text' placeholder = 'Enter Url' onChange = {onChange}/>
             <button className = 'urlSubmitButton' type = 'submit' onClick = {onSubmit}>Submit</button>
           </form>
-
           </div>
+
           <div className = 'outerPlayer'>
 
             <div className = 'onlyPlayer'>
-          <YouTube 
-          videoId={videoId} 
-          onReady={onReady}
-          onStateChange={onStateChange}
-           />
-           <div className='Buttons'>
-          <button className='playButton' type="button" onClick={onPlayVideo}>
-            Play
-          </button>
-          <button className='pauseButton' type="button" onClick={onPauseVideo}>
-            Pause
-          </button>
-          <button className='syncButton' type="button" onClick={onSyncVideo}>
-            Sync
-          </button>
-          </div>
-          </div>
+              <div className = 'player-container'>
+                <YouTube 
+                className = 'player'
+                videoId={videoId} 
+                onReady={onReady}
+                onStateChange={onStateChange}
+                />
+                </div>
+
+                <div className='Buttons'>
+
+                  <button className='playButton' type="button" onClick={onPlayVideo}>
+                    Play
+                  </button>
+                  <button className='pauseButton' type="button" onClick={onPauseVideo}>
+                    Pause
+                  </button>
+                  <button className='syncButton' type="button" onClick={onSyncVideo}>
+                    Sync
+                  </button>
+
+                </div>
+
+            </div>
 
         <div className = 'onlineInfo'>
-        <Onlineinfo users = {roomUsers} />
+          <Onlineinfo users = {roomUsers} />
         </div>
 
         <div className = 'chat'>
-        <Chat messages = {messages} message = {message} name = {name} setMessage = {setMessage} sendMessage = {sendMessage} />
+          <Chat messages = {messages} message = {message} name = {name} setMessage = {setMessage} sendMessage = {sendMessage} />
         </div>
 
         </div>

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './style/Infobar.css'
+
 const Infobar = ({name , room}) => {
     return(
         <div className = 'InfobarOuter'>
