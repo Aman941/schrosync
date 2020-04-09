@@ -33,11 +33,14 @@ io.on('connect' , (socket) =>{
         callback();
       });
 
+      // on changing video
+
       socket.on('linkChange' , ({video_id}) =>{
           const user = getUser(socket.id);
           console.log(socket.id);
           console.log(`link == ${video_id} requested by ${user.name}`);
           socket.broadcast.to(user.room).emit('changedLink' , {video_id:{video_id}});
+          io.to(user.room).emit('message', { user: 'admin', text: `${user.name} changed video` });
       });
 
       // on sync video request
@@ -46,6 +49,7 @@ io.on('connect' , (socket) =>{
           const user = getUser(socket.id);
           console.log(`time recieved ${time}`);
           socket.broadcast.to(user.room).emit('videoSync' , {time});
+          io.to(user.room).emit('message', { user: 'admin', text: `${user.name} synced video` });
       });
 
       // on send message
